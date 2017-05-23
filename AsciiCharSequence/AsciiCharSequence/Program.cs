@@ -14,11 +14,12 @@ namespace AsciiCharSequence
             byte[] mas = new byte[] { 99,100,101,102,103 };
             AsciiCharSequence inst = new AsciiCharSequence(mas);
 
-            foreach (char item in inst.SubSequence(1,1))
+            foreach (char item in inst.SubSequence(1, 0))
             {
+                Console.WriteLine(item);
 
             }
-
+            Console.WriteLine(new string('*', 20));
             foreach (char item in inst)
             {
                 Console.WriteLine(item);
@@ -48,7 +49,7 @@ namespace AsciiCharSequence
 
         public IEnumerable<char> SubSequence(int start, int end)
         {
-            for (int i = start; i < end; i++)
+            for (int i = start; i <= end; i++)
             {
                 yield return Convert.ToChar(arrayOfBytes[i]);
             }
