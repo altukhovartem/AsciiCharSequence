@@ -11,19 +11,19 @@ namespace AsciiCharSequence
     {
         static void Main(string[] args)
         {
-            byte[] mas = new byte[] { 99,100,101,102,103 };
-            AsciiCharSequence inst = new AsciiCharSequence(mas);
+            //IEnumerable s = new AsciiCharSequence(new byte[] { 40, 50, 90 });
+            //foreach (var c in s)
+            //{
+            //    Console.WriteLine(c);
+            //}
 
-            foreach (char item in inst.SubSequence(1, 0))
+            IEnumerable s = new AsciiCharSequence(new byte[] { 40, 50, 90 });
+            foreach (char c in s)
             {
-                Console.WriteLine(item);
+                Console.WriteLine(c);
 
             }
-            Console.WriteLine(new string('*', 20));
-            foreach (char item in inst)
-            {
-                Console.WriteLine(item);
-            }
+
         }
     }
 
@@ -57,7 +57,7 @@ namespace AsciiCharSequence
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return arrayOfBytes.GetEnumerator();
+            return ((IEnumerable<char>)this).GetEnumerator();
         }
 
         IEnumerator<char> IEnumerable<char>.GetEnumerator()
