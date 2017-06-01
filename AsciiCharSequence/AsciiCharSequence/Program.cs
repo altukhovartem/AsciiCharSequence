@@ -11,19 +11,17 @@ namespace AsciiCharSequence
     {
         static void Main(string[] args)
         {
-            //IEnumerable s = new AsciiCharSequence(new byte[] { 40, 50, 90 });
-            //foreach (var c in s)
-            //{
-            //    Console.WriteLine(c);
-            //}
-
-            IEnumerable s = new AsciiCharSequence(new byte[] { 40, 50, 90 });
+            AsciiCharSequence s = new AsciiCharSequence(new byte[] {50, 90, 100, 110, 120 });
             foreach (char c in s)
             {
                 Console.WriteLine(c);
-
             }
-
+            Console.WriteLine(new string('*', 20));
+            var sub = s.SubSequence(0, 3);
+            foreach (char c in sub)
+            {
+                Console.WriteLine(c);
+            }
         }
     }
 
@@ -49,6 +47,11 @@ namespace AsciiCharSequence
 
         public IEnumerable<char> SubSequence(int start, int end)
         {
+            if (start < 0 || start >= arrayOfBytes.Length)
+                throw new Exception("Incorrect start index");
+            if (end < start || end > arrayOfBytes.Length )
+                throw new Exception("Incorrect end index");
+
             for (int i = start; i <= end; i++)
             {
                 yield return Convert.ToChar(arrayOfBytes[i]);
@@ -57,10 +60,10 @@ namespace AsciiCharSequence
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return ((IEnumerable<char>)this).GetEnumerator();
+            return GetEnumerator();
         }
 
-        IEnumerator<char> IEnumerable<char>.GetEnumerator()
+        public IEnumerator<char> GetEnumerator()
         {
             foreach (var item in arrayOfBytes)
             {
